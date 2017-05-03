@@ -1,1 +1,2 @@
-docker run -d -u root --name jenkins -p 8080:8080 -p 50000:50000 -v /root/docker/jenkins/:/var/jenkins_home registry.cn-qingdao.aliyuncs.com/icommon/jenkins:v2.46.2
+#docker run -d -u root --name jenkins -p 8080:8080 -p 50000:50000 -v /data/devops/jenkins_home:/var/jenkins_home registry.cn-qingdao.aliyuncs.com/icommon/jenkins:v2.46.2
+docker run -d -u root --name jenkins -p 8080:8080 -p 50000:50000 --env JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties" -v /data/devops/jenkins_home:/var/jenkins_home registry.cn-qingdao.aliyuncs.com/icommon/jenkins:v2.46.2
