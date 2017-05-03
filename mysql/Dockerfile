@@ -1,17 +1,24 @@
-FROM oraclelinux:7-slim
-ENV PACKAGE_URL https://repo.mysql.com/yum/mysql-5.7-community/docker/x86_64/mysql-community-server-minimal-5.7.18-1.el7.x86_64.rpm
+FROM registry.cn-qingdao.aliyuncs.com/icommon/centos7 
 
-# Install server
-RUN rpmkeys --import http://repo.mysql.com/RPM-GPG-KEY-mysql \
-  && yum install -y $PACKAGE_URL \
-  && yum install -y libpwquality \
-  && rm -rf /var/cache/yum/*
+
+RUN yum -y install yum-utils wget \
+  && yum remove -y mysql-libs \
+  && yum remove -y mysql \
+  && wget dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm \
+  && yum -y localinstall mysql-community-release-el6-5.noarch.rpm \
+  && yum-config-manager --disable mysql55-community \
+  && yum-config-manager --disable mysql56-community \
+  && yum-config-manager --enable mysql57-community-dmr \
+  && yum -y install mysql-community-server
+  
 RUN mkdir /docker-entrypoint-initdb.d
 
 VOLUME /var/lib/mysql
 
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY docker-entrypoint.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
+ENTRYPOINT ["/root/entrypoint.sh"]
 
-EXPOSE 3306 33060
+EXPOSE 3306
+
 CMD ["mysqld"]

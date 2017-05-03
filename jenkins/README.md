@@ -1,8 +1,6 @@
 # Official Jenkins Docker image
 
-jenkins-2.46.2.war:https://pan.baidu.com/s/1boQHhTl
-
-plugins_sonarqube:https://pan.baidu.com/s/1qYhQ6HA
+jenkins-2.46.2.war:https://pan.baidu.com/s/1i5FVOED
 
 The Jenkins Continuous Integration and Delivery server.
 
