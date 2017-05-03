@@ -2,7 +2,7 @@ FROM registry.cn-qingdao.aliyuncs.com/icommon/openjdk:8-jdk
 
 MAINTAINER qinglong <siriaodao@vip.qq.com>
 
-ENV SONAR_VERSION=6.3 \
+ENV SONAR_VERSION=6.3.1 \
     SONARQUBE_HOME=/opt/sonarqube \
     # Database configuration
     # Defaults to using H2
@@ -13,8 +13,8 @@ ENV SONAR_VERSION=6.3 \
 # Http port
 EXPOSE 9000
 
-COPY sonarqube-6.3.zip /opt/sonarqube.zip
-COPY sonarqube-6.3.zip.asc /opt/sonarqube.zip.asc
+COPY sonarqube-6.3.1.zip /opt/sonarqube.zip
+COPY sonarqube-6.3.1.zip.asc /opt/sonarqube.zip.asc
 
 RUN set -x \
 
