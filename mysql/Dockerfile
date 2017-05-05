@@ -10,19 +10,17 @@ RUN yum -y install yum-utils wget \
   && yum-config-manager --disable mysql56-community \
   && yum-config-manager --enable mysql57-community-dmr \
   && yum -y install mysql-community-server
-  
+
 RUN mkdir /docker-entrypoint-initdb.d
 
 VOLUME /var/lib/mysql
 
-COPY docker-entrypoint.sh /root/entrypoint.sh
-
-RUN useradd mysql
-
-RUN chmod +x /root/entrypoint.sh && chown mysql.mysql /root/entrypoint.sh
-
-ENTRYPOINT ["/root/entrypoint.sh"]
-
 EXPOSE 3306
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 CMD ["mysqld"]
