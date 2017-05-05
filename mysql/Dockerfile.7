@@ -1,5 +1,6 @@
 FROM registry.cn-qingdao.aliyuncs.com/icommon/centos7 
 
+MAINTAINER qinglong "siriaodao@vip.com" 
 
 RUN yum -y install yum-utils wget \
   && yum remove -y mysql-libs \
@@ -12,8 +13,6 @@ RUN yum -y install yum-utils wget \
   && yum -y install mysql-community-server
 
 RUN mkdir /docker-entrypoint-initdb.d
-
-VOLUME /var/lib/mysql
 
 EXPOSE 3306
 
