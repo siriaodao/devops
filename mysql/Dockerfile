@@ -16,7 +16,11 @@ RUN mkdir /docker-entrypoint-initdb.d
 VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /root/entrypoint.sh
-RUN chmod +x /root/entrypoint.sh
+
+RUN useradd mysql
+
+RUN chmod +x /root/entrypoint.sh && chown mysql.mysql /root/entrypoint.sh
+
 ENTRYPOINT ["/root/entrypoint.sh"]
 
 EXPOSE 3306
