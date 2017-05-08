@@ -1,0 +1,37 @@
+version: '2.1'
+services:
+  mysql:
+    image: registry.cn-qingdao.aliyuncs.com/icommon/mysql:v5.7.18
+    ports:
+    - 3306:3306
+    privileged: true
+    user: mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=123456
+    - MYSQL_DATABASE=sonar
+    - MYSQL_USER=sonar
+    - MYSQL_PASSWORD=sonar
+    restart: always
+    volumes:
+    - /data/devops/mysql/data:/var/lib/mysql
+
+  sonarqube:
+    image: registry.cn-qingdao.aliyuncs.com/icommon/sonarqube:v6.3.1
+    ports:
+    - 9000:9000
+    - 9092:9092
+    environment:
+    - SONARQUBE_JDBC_URL=jdbc:mysql://192.168.143.134:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+    restart: always
+    volumes:
+    - /data/devops/sonarqube/data:/opt/sonarqube/data
+
+  jenkins:
+    image: registry.cn-qingdao.aliyuncs.com/icommon/jenkins:v2.46.2
+    ports:
+    - 8080:8080
+    - 50000:50000
+    user: root
+    restart: always
+    volumes:
+    - /data/devops/jenkins_home:/var/jenkins_home
