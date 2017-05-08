@@ -1,7 +1,10 @@
 # v5.7.18
 docker run -d -u mysql --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -v /data/devops/mysql/data:/var/lib/mysql registry.cn-qingdao.aliyuncs.com/icommon/mysql:v5.7.18
 
+<<<<<<< HEAD
 # MYSQL_ROOT_HOST
+=======
+>>>>>>> b2591daa276d52d2c831e1b36491a221f8325934
 # MYSQL_ROOT_PASSWORD
 # MYSQL_DATABASE
 # MYSQL_USER
@@ -9,6 +12,7 @@ docker run -d -u mysql --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -
 # MYSQL_ALLOW_EMPTY_PASSWORD
 # MYSQL_RANDOM_ROOT_PASSWORD
 # MYSQL_ONETIME_PASSWORD
+<<<<<<< HEAD
 
 在CentOS7中运行NodeJs的容器，发现挂载的本地目录在容器中没有执行权限，经过各种验证和Google搜索，找到了问题的原因，这里做一下记录。原因是CentOS7中的安全模块selinux把权限禁掉了，至少有以下三种方式解决挂载的目录没有权限的问题：
 
@@ -27,6 +31,11 @@ docker run -d -u mysql --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -
 3，添加selinux规则，将要挂载的目录添加到白名单：
 
 示例：chcon -Rt svirt_sandbox_file_t /home/docs
+=======
+# MYSQL_ROOT_HOST
+
+$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql-root -d mysql:tag
+>>>>>>> b2591daa276d52d2c831e1b36491a221f8325934
 
 # v5.6
 docker run -d --name mysql -p 3306:3306  -v /data/devops/mysql/data:/var/lib/mysql  registry.cn-qingdao.aliyuncs.com/icommon/mysql:v5.6
