@@ -4,6 +4,7 @@ services:
     image: registry.cn-qingdao.aliyuncs.com/icommon/mysql:v5.7.18
     ports:
     - 3306:3306
+    hostname: mysql
     privileged: true
     user: mysql
     environment:
@@ -20,8 +21,9 @@ services:
     ports:
     - 9000:9000
     - 9092:9092
+    hostname: sonarqube
     environment:
-    - SONARQUBE_JDBC_URL=jdbc:mysql://192.168.143.134:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+    - SONARQUBE_JDBC_URL=jdbc:mysql://mysql:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
     restart: always
     volumes:
     - /data/devops/sonarqube/data:/opt/sonarqube/data
